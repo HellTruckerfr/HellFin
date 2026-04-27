@@ -2,11 +2,14 @@
 
 @import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
 
-/* AUDIOBOOKS — reset ElegantFin layout */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block !important; }
+/* AUDIOBOOKS — reset complet vers layout Jellyfin par défaut */
+#itemDetailPage:has([data-type="AudioBook"]) .itemBackdrop { display: none !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-top: 1em !important; margin-top: 0 !important; }
 #itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer { flex-direction: row !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: initial !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block !important; width: auto !important; place-self: unset !important; position: static !important; float: none !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailRibbon { height: auto !important; min-height: unset !important; margin-top: 0 !important; background-color: transparent !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .itemName { font-size: initial !important; font-weight: initial !important; white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
 #itemDetailPage:has([data-type="AudioBook"]) .detailSection { grid-template-columns: 1fr !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; font-size: initial !important; font-weight: initial !important; }
 
 /* GLOBAL */
 .detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
