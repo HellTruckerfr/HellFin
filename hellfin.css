@@ -1,70 +1,19 @@
-/* ============================================================
-   HellFin — Jellyfin Custom Theme
-   GitHub : https://github.com/HellTruckerfr/HellFin
-   Base   : ElegantFin by lscambo13
-   ============================================================ */
+/* HellFin — https://github.com/HellTruckerfr/HellFin */
 
 @import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
 
+/* AUDIOBOOKS — reset ElegantFin layout */
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer { flex-direction: row !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: initial !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailSection { grid-template-columns: 1fr !important; }
+#itemDetailPage:has([data-type="AudioBook"]) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; font-size: initial !important; font-weight: initial !important; }
 
-/* ============================================================
-   GLOBAL — synopsis always expanded
-   ============================================================ */
+/* GLOBAL */
+.detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
+.overview-controls { display: none !important; }
 
-.detail-clamp-text {
-    display: block !important;
-    -webkit-line-clamp: unset !important;
-    overflow: visible !important;
-}
+/* FILMS — overrides ici */
 
-.overview-controls {
-    display: none !important;
-}
+/* SERIES — overrides ici */
 
-
-/* ============================================================
-   AUDIOBOOKS — layout Jellyfin par défaut
-   (annule le layout ElegantFin sur les pages AudioBook)
-   ============================================================ */
-
-/* Réafficher la cover portrait */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card {
-    display: block !important;
-}
-
-/* Remettre le container en row */
-#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer {
-    flex-direction: row !important;
-    align-items: flex-start !important;
-    justify-content: flex-start !important;
-    align-content: initial !important;
-}
-
-/* Grille 1 colonne */
-#itemDetailPage:has([data-type="AudioBook"]) .detailSection {
-    grid-template-columns: 1fr !important;
-}
-
-/* Titre non tronqué */
-#itemDetailPage:has([data-type="AudioBook"]) .itemName {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    font-size: initial !important;
-    font-weight: initial !important;
-}
-
-
-/* ============================================================
-   FILMS — add overrides here
-   ============================================================ */
-
-
-/* ============================================================
-   SÉRIES — add overrides here
-   ============================================================ */
-
-
-/* ============================================================
-   MUSIQUE — add overrides here
-   ============================================================ */
+/* MUSIQUE — overrides ici */
