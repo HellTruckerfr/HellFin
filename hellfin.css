@@ -1,142 +1,10 @@
 /* ============================================================
    HellFin — Jellyfin Custom Theme
    GitHub : https://github.com/HellTruckerfr/HellFin
-   Visual inspired by ElegantFin (lscambo13)
-   Layout ElegantFin : Films / Séries / Musique
-   Layout Jellyfin default : Audiobooks
+   Base   : ElegantFin by lscambo13
    ============================================================ */
 
-
-/* ============================================================
-   VARIABLES
-   ============================================================ */
-
-:root {
-    color-scheme: dark;
-    --hf-dark:               #111827;
-    --hf-dark-alpha:         rgba(17, 24, 39, 0.85);
-    --hf-mid:                #1d2635;
-    --hf-mid-alpha:          rgba(29, 38, 53, 0.85);
-    --hf-border:             hsl(214, 13%, 32%);
-    --hf-border-dark:        hsl(214, 13%, 22%);
-    --hf-text:               rgb(209, 213, 219);
-    --hf-bg-gradient:        linear-gradient(0deg, var(--hf-dark) 35%, var(--hf-mid));
-    --hf-card-bg-gradient:   linear-gradient(0deg, var(--hf-dark) 25%, var(--hf-mid));
-    --hf-card-foot-gradient: linear-gradient(0deg, rgb(0 0 0 / 90%) 40%, transparent);
-    --hf-backdrop-mask:      linear-gradient(180deg, rgba(0,0,0,0.8) 75%, transparent);
-    --hf-radius-lg: 1em;
-    --hf-radius-sm: 0.5em;
-    --hf-border-w:  0.06em;
-    --hf-blur-lg:   blur(20px);
-    --hf-shadow:    0.1em 0.1em 0.15em hsla(0, 0%, 0%, 0.3);
-    --hf-side-padding: 3.3%;
-}
-
-body {
-    --primaryItemPageNegativeSpace: 14vh;
-    --secondaryItemPageNegativeSpace: 60vh;
-}
-
-
-/* ============================================================
-   DARK BACKGROUND
-   ============================================================ */
-
-html,
-.backgroundContainer:not(.withBackdrop) {
-    background: var(--hf-bg-gradient) !important;
-}
-
-
-/* ============================================================
-   TYPOGRAPHY
-   ============================================================ */
-
-html {
-    font-family: "Inter", "Noto Sans", sans-serif;
-    color: var(--hf-text);
-}
-
-
-/* ============================================================
-   HEADER
-   ============================================================ */
-
-.skinHeader-blurred {
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    background: linear-gradient(180deg, var(--hf-dark-alpha) 80%, transparent) !important;
-    border-bottom: var(--hf-border-w) solid var(--hf-border) !important;
-}
-
-
-/* ============================================================
-   BACKDROP EFFECT
-   ============================================================ */
-
-.itemBackdrop {
-    filter: var(--hf-blur-lg) !important;
-}
-
-.backdropImage::before {
-    filter: var(--hf-blur-lg) !important;
-}
-
-.backdropImage::after {
-    content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    background: var(--hf-backdrop-mask) !important;
-}
-
-
-/* ============================================================
-   CARDS
-   ============================================================ */
-
-.cardScalable {
-    border-radius: var(--hf-radius-lg) !important;
-    border: var(--hf-border-w) solid var(--hf-border) !important;
-    box-shadow: var(--hf-shadow) !important;
-    overflow: hidden !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-.cardScalable:hover {
-    transform: scale(1.04) !important;
-    box-shadow: 0 0.4em 1.2em rgba(0, 0, 0, 0.6) !important;
-    border-color: var(--hf-text) !important;
-}
-
-.defaultCardBackground {
-    background: var(--hf-card-bg-gradient) !important;
-}
-
-.cardFooter {
-    background: var(--hf-card-foot-gradient) !important;
-}
-
-.cardText {
-    color: var(--hf-text) !important;
-}
-
-
-/* ============================================================
-   BUTTONS — detail page
-   ============================================================ */
-
-.btnPlay.detailButton {
-    background-color: var(--hf-text) !important;
-    color: #000 !important;
-    border-radius: 3em !important;
-    font-weight: 600 !important;
-}
-
-.detailButton:not(.btnPlay) {
-    border-radius: 50% !important;
-    border: var(--hf-border-w) solid var(--hf-border) !important;
-    background: transparent !important;
-}
+@import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
 
 
 /* ============================================================
@@ -155,94 +23,36 @@ html {
 
 
 /* ============================================================
-   DETAIL PAGES — ElegantFin layout (Films / Séries / Musique)
-   Excluded from AudioBook pages via :not(:has([data-type="AudioBook"]))
+   AUDIOBOOKS — layout Jellyfin par défaut
+   (annule le layout ElegantFin sur les pages AudioBook)
    ============================================================ */
 
-/* Column layout pushed to the bottom of the backdrop */
-#itemDetailPage:not(:has([data-type="AudioBook"])) .detailPagePrimaryContainer {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: end !important;
-    align-content: space-between !important;
-    text-align: left !important;
-}
-
-.layout-desktop #itemDetailPage:not(:has([data-type="AudioBook"])) .detailPagePrimaryContainer {
-    background: transparent !important;
-}
-
-/* Padding on ribbon and primary content */
-[dir=ltr] #itemDetailPage:not(:has([data-type="AudioBook"])) .detailPagePrimaryContainer > .detailRibbon {
-    padding-left: var(--hf-side-padding) !important;
-}
-
-#itemDetailPage:not(:has([data-type="AudioBook"])) .detailPagePrimaryContainer > .detailPagePrimaryContent {
-    padding-left: var(--hf-side-padding) !important;
-    padding-top: 0 !important;
-}
-
-/* Wrapper gradient underneath backdrop */
-.layout-desktop #itemDetailPage:not(:has([data-type="AudioBook"])) .detailPageWrapperContainer {
-    background: linear-gradient(180deg, transparent, 17vh, var(--hf-dark-alpha) 50vh) !important;
-    min-height: 46vh !important;
-}
-
-/* Backdrop height on desktop */
-.layout-desktop #itemDetailPage:not(:has([data-type="AudioBook"])) .itemBackdrop {
-    height: calc(100vh - 27vh - var(--primaryItemPageNegativeSpace)) !important;
-}
-
-/* Portrait card hidden (backdrop is used as visual) */
-#itemDetailPage:not(:has([data-type="AudioBook"])) .detailImageContainer .card {
-    display: none !important;
-}
-
-#itemDetailPage:not(:has([data-type="AudioBook"])) .detailImageContainer .card.backdropCard {
+/* Réafficher la cover portrait */
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card {
     display: block !important;
-    width: 40vh !important;
-    max-width: 50vw !important;
 }
 
-/* Ribbon: transparent background, min height */
-#itemDetailPage:not(:has([data-type="AudioBook"])) .detailRibbon {
-    background-color: transparent !important;
+/* Remettre le container en row */
+#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    align-content: initial !important;
 }
 
-.layout-desktop #itemDetailPage:not(:has([data-type="AudioBook"])) .detailRibbon {
-    height: 100% !important;
-    min-height: 25vh !important;
-    margin-top: unset !important;
-}
-
-/* Large thin title */
-#itemDetailPage:not(:has([data-type="AudioBook"])) .nameContainer > h1.itemName,
-#itemDetailPage:not(:has([data-type="AudioBook"])) .nameContainer > h1.parentName {
-    font-size: 4em !important;
-    font-weight: 200 !important;
-    white-space: pre-wrap !important;
-    padding-bottom: .5ch !important;
-    color: white !important;
-}
-
-/* 4-column detail section */
-#itemDetailPage:not(:has([data-type="AudioBook"])) .detailSection {
-    display: grid !important;
-    row-gap: 1em !important;
-    column-gap: 3em !important;
-    max-width: unset !important;
-    grid-template-columns: 25% 1fr 1fr 1fr !important;
-    margin-bottom: 1.5em !important;
-}
-
-.layout-mobile #itemDetailPage:not(:has([data-type="AudioBook"])) .detailSection {
+/* Grille 1 colonne */
+#itemDetailPage:has([data-type="AudioBook"]) .detailSection {
     grid-template-columns: 1fr !important;
 }
 
-
-/* ============================================================
-   AUDIOBOOKS — layout Jellyfin par défaut (pas de surcharge)
-   ============================================================ */
+/* Titre non tronqué */
+#itemDetailPage:has([data-type="AudioBook"]) .itemName {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    font-size: initial !important;
+    font-weight: initial !important;
+}
 
 
 /* ============================================================
