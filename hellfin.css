@@ -1,22 +1,27 @@
+@layer hellfin-audio;
+@import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css') layer(elegantfin);
 /* HellFin — https://github.com/HellTruckerfr/HellFin */
 
-@import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
+/* AUDIOBOOKS — layout Jellyfin par défaut, zéro ElegantFin */
+/* Règles normales unlayered : gagnent sur les règles normales d'ElegantFin */
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: flex-start; justify-content: flex-start; align-content: initial; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer.hide-mobile { width: 300px; min-width: 300px; flex-shrink: 0; padding: 0; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailRibbon { flex: 1 1 auto; height: auto; min-height: unset; margin-top: 0; }
+#itemDetailPage:has([data-type="AudioBook"]) .itemName { font-size: initial; font-weight: initial; white-space: normal; overflow: visible; text-overflow: unset; }
+#itemDetailPage:has([data-type="AudioBook"]) .detailSection { grid-template-columns: 1fr; }
 
-/* AUDIOBOOKS — reset complet vers layout Jellyfin par défaut */
-#itemDetailPage:has([data-type="AudioBook"]) .itemBackdrop { display: none !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-top: 1em !important; margin-top: 0 !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer { flex-direction: row !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: initial !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block !important; width: auto !important; place-self: unset !important; position: static !important; float: none !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .detailRibbon { height: auto !important; min-height: unset !important; margin-top: 0 !important; background-color: transparent !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .itemName { font-size: initial !important; font-weight: initial !important; white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .detailSection { grid-template-columns: 1fr !important; }
+/* Règles !important dans hellfin-audio (1er layer déclaré) : gagnent sur les !important d'ElegantFin */
+@layer hellfin-audio {
+    #itemDetailPage:has([data-type="AudioBook"]) .itemBackdrop { height: unset !important; }
+    #itemDetailPage:has([data-type="AudioBook"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; }
+    #itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block !important; width: 100% !important; place-self: auto !important; position: static !important; float: none !important; }
+}
 
 /* GLOBAL */
 .detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
 .overview-controls { display: none !important; }
 
 /* FILMS — overrides ici */
-
 /* SERIES — overrides ici */
-
 /* MUSIQUE — overrides ici */
