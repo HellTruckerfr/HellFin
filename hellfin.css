@@ -1,84 +1,172 @@
 /* ============================================================
-   Jellyfin Custom Theme
-   Base : ElegantFin by lscambo13
-   Overrides : AudioBook detail page
+   HellFin — Jellyfin Custom Theme
+   GitHub : https://github.com/HellTruckerfr/HellFin
+   Visual inspired by ElegantFin (lscambo13)
+   Layout : Jellyfin default — no layout overrides
    ============================================================ */
-
-@import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
 
 
 /* ============================================================
-   GLOBAL
+   VARIABLES
    ============================================================ */
 
-/* Synopsis toujours développé */
+:root {
+    color-scheme: dark;
+    --hf-dark:              #111827;
+    --hf-dark-alpha:        rgba(17, 24, 39, 0.85);
+    --hf-mid:               #1d2635;
+    --hf-mid-alpha:         rgba(29, 38, 53, 0.85);
+    --hf-border:            hsl(214, 13%, 32%);
+    --hf-border-dark:       hsl(214, 13%, 22%);
+    --hf-text:              rgb(209, 213, 219);
+    --hf-bg-gradient:       linear-gradient(0deg, var(--hf-dark) 35%, var(--hf-mid));
+    --hf-card-bg-gradient:  linear-gradient(0deg, var(--hf-dark) 25%, var(--hf-mid));
+    --hf-card-foot-gradient: linear-gradient(0deg, rgb(0 0 0 / 90%) 40%, transparent);
+    --hf-backdrop-mask:     linear-gradient(180deg, rgba(0,0,0,0.8) 75%, transparent);
+    --hf-radius-lg: 1em;
+    --hf-radius-sm: 0.5em;
+    --hf-border-w:  0.06em;
+    --hf-blur-lg:   blur(20px);
+    --hf-shadow:    0.1em 0.1em 0.15em hsla(0, 0%, 0%, 0.3);
+}
+
+body {
+    --primaryItemPageNegativeSpace: 14vh;
+    --secondaryItemPageNegativeSpace: 60vh;
+}
+
+
+/* ============================================================
+   DARK BACKGROUND
+   ============================================================ */
+
+html,
+.backgroundContainer:not(.withBackdrop) {
+    background: var(--hf-bg-gradient) !important;
+}
+
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+html {
+    font-family: "Inter", "Noto Sans", sans-serif;
+    color: var(--hf-text);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.skinHeader-blurred {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    background: linear-gradient(180deg, var(--hf-dark-alpha) 80%, transparent) !important;
+    border-bottom: var(--hf-border-w) solid var(--hf-border) !important;
+}
+
+
+/* ============================================================
+   BACKDROP EFFECT
+   ============================================================ */
+
+.itemBackdrop {
+    filter: var(--hf-blur-lg) !important;
+}
+
+.backdropImage::before {
+    filter: var(--hf-blur-lg) !important;
+}
+
+.backdropImage::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: var(--hf-backdrop-mask) !important;
+}
+
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.cardScalable {
+    border-radius: var(--hf-radius-lg) !important;
+    border: var(--hf-border-w) solid var(--hf-border) !important;
+    box-shadow: var(--hf-shadow) !important;
+    overflow: hidden !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.cardScalable:hover {
+    transform: scale(1.04) !important;
+    box-shadow: 0 0.4em 1.2em rgba(0, 0, 0, 0.6) !important;
+    border-color: var(--hf-text) !important;
+}
+
+.defaultCardBackground {
+    background: var(--hf-card-bg-gradient) !important;
+}
+
+.cardFooter {
+    background: var(--hf-card-foot-gradient) !important;
+}
+
+.cardText {
+    color: var(--hf-text) !important;
+}
+
+
+/* ============================================================
+   BUTTONS — detail page
+   ============================================================ */
+
+.btnPlay.detailButton {
+    background-color: var(--hf-text) !important;
+    color: #000 !important;
+    border-radius: 3em !important;
+    font-weight: 600 !important;
+}
+
+.detailButton:not(.btnPlay) {
+    border-radius: 50% !important;
+    border: var(--hf-border-w) solid var(--hf-border) !important;
+    background: transparent !important;
+}
+
+
+/* ============================================================
+   GLOBAL — synopsis always expanded
+   ============================================================ */
+
 .detail-clamp-text {
     display: block !important;
     -webkit-line-clamp: unset !important;
     overflow: visible !important;
 }
-.overview-controls { display: none !important; }
 
-
-/* ============================================================
-   AUDIOBOOKS — Couverture à gauche
-   ============================================================ */
-
-/* Espace pour la cover dans le container principal */
-#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer {
-    position: relative !important;
-    padding-left: 340px !important;
-    min-height: 530px !important;
-    justify-content: center !important;
-}
-
-/* Cover : absolue en haut à gauche */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer.hide-mobile {
-    display: block !important;
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 340px !important;
-    padding: 0 !important;
-}
-
-/* Afficher la carte portrait (ElegantFin la cache) */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer > .portraitCard {
-    display: block !important;
-}
-
-/* Taille naturelle de la carte */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card.portraitCard {
-    width: 100% !important;
-    position: relative !important;
-    margin: 0 !important;
-    float: none !important;
-    place-self: start !important;
-}
-
-/* Titre non tronqué */
-#itemDetailPage:has([data-type="AudioBook"]) .itemName {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-}
-
-/* Section détails : colonne unique au lieu de 4 colonnes */
-#itemDetailPage:has([data-type="AudioBook"]) .detailSection {
-    grid-template-columns: 1fr !important;
+.overview-controls {
+    display: none !important;
 }
 
 
 /* ============================================================
-   FILMS — ajouter ici
+   AUDIOBOOKS — add overrides here
    ============================================================ */
 
 
 /* ============================================================
-   SÉRIES — ajouter ici
+   FILMS — add overrides here
    ============================================================ */
 
 
 /* ============================================================
-   MUSIQUE — ajouter ici
+   SÉRIES — add overrides here
+   ============================================================ */
+
+
+/* ============================================================
+   MUSIQUE — add overrides here
    ============================================================ */
