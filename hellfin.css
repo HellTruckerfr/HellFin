@@ -1,0 +1,84 @@
+/* ============================================================
+   Jellyfin Custom Theme
+   Base : ElegantFin by lscambo13
+   Overrides : AudioBook detail page
+   ============================================================ */
+
+@import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
+
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+/* Synopsis toujours développé */
+.detail-clamp-text {
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+    overflow: visible !important;
+}
+.overview-controls { display: none !important; }
+
+
+/* ============================================================
+   AUDIOBOOKS — Couverture à gauche
+   ============================================================ */
+
+/* Espace pour la cover dans le container principal */
+#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer {
+    position: relative !important;
+    padding-left: 340px !important;
+    min-height: 530px !important;
+    justify-content: center !important;
+}
+
+/* Cover : absolue en haut à gauche */
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer.hide-mobile {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 340px !important;
+    padding: 0 !important;
+}
+
+/* Afficher la carte portrait (ElegantFin la cache) */
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer > .portraitCard {
+    display: block !important;
+}
+
+/* Taille naturelle de la carte */
+#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card.portraitCard {
+    width: 100% !important;
+    position: relative !important;
+    margin: 0 !important;
+    float: none !important;
+    place-self: start !important;
+}
+
+/* Titre non tronqué */
+#itemDetailPage:has([data-type="AudioBook"]) .itemName {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+}
+
+/* Section détails : colonne unique au lieu de 4 colonnes */
+#itemDetailPage:has([data-type="AudioBook"]) .detailSection {
+    grid-template-columns: 1fr !important;
+}
+
+
+/* ============================================================
+   FILMS — ajouter ici
+   ============================================================ */
+
+
+/* ============================================================
+   SÉRIES — ajouter ici
+   ============================================================ */
+
+
+/* ============================================================
+   MUSIQUE — ajouter ici
+   ============================================================ */
