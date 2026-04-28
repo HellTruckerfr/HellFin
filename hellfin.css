@@ -92,6 +92,119 @@
 
 
 /* ====================================================================
+   FOND DE PAGE
+   ==================================================================== */
+
+html,
+.nowPlayingPlaylist,
+.nowPlayingContextMenu,
+.backgroundContainer:not(.withBackdrop),
+.backgroundContainer:not(.backgroundContainer-transparent),
+.backdropContainer {
+    background-color: var(--darkerGradientPoint);
+    background: var(--backgroundGradient);
+}
+
+.backgroundContainer.withBackdrop {
+    opacity: 0.9;
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(17, 24, 39, 0.25));
+}
+
+.layout-tv .backgroundContainer.withBackdrop {
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(17, 24, 39, 0.95));
+}
+
+.layout-mobile .backgroundContainer.withBackdrop {
+    opacity: 1;
+    background: var(--darkerGradientPoint);
+}
+
+.withSectionTabs .backgroundContainer.withBackdrop {
+    background: var(--darkerGradientPoint);
+}
+
+
+/* ====================================================================
+   HEADER / APP BAR
+   ==================================================================== */
+
+.skinHeader-blurred:not(.osdHeader):not(.semiTransparent) {
+    backdrop-filter: var(--blurLarge);
+    background: var(--headerColor);
+    border: var(--defaultBorder);
+    border-width: 0 0 var(--borderWidth) 0;
+}
+
+.skinHeader-withBackground.semiTransparent {
+    --headerBackground: none;
+    backdrop-filter: none;
+    background-color: transparent;
+    border: none;
+}
+
+.headerTop {
+    align-items: center;
+    padding: 0;
+    height: var(--appBarHeight);
+}
+
+.layout-desktop .headerTop { padding: 0 1em; }
+.layout-tv .headerTop { padding: 0 0.5em; }
+
+.headroom--unpinned {
+    transform: translateY(calc(-1 * var(--appBarHeight) - var(--borderWidth)));
+}
+
+.sectionTabs {
+    display: inline-grid;
+    height: var(--appBarHeight);
+}
+
+.sectionTabs .emby-tab-button {
+    display: inline-flex;
+    margin: 0.25em 0.5em;
+    padding: 0 1.25em;
+    height: 2.5em;
+    color: var(--textColor);
+    font-weight: 400;
+    border-radius: var(--largeRadius);
+    background-color: var(--darkerGradientPointAlpha);
+}
+
+.sectionTabs .emby-tab-button-active {
+    margin: 0.25em 0.5em;
+    color: black;
+    background-color: var(--textColor);
+}
+
+
+/* ====================================================================
+   DRAWER / MENU LATÉRAL
+   ==================================================================== */
+
+.mainDrawer, .drawer-open {
+    background-color: var(--drawerColor);
+    border-right: var(--defaultBorder);
+    backdrop-filter: var(--blurLarge);
+}
+
+.mainDrawer-scrollContainer { padding-bottom: 5vh; }
+
+.navMenuOption {
+    border-radius: var(--smallRadius) !important;
+    margin: 0em 1em !important;
+}
+
+[dir="ltr"] .navMenuOption {
+    padding: 0.75em 1em !important;
+    margin-bottom: unset;
+}
+
+.navMenuOption:hover, .navMenuOption:active { background: rgba(255, 255, 255, 0.125); }
+.navMenuOption-selected { background-color: var(--activeColor) !important; }
+
+
+/* ====================================================================
    TYPOGRAPHIE DE BASE
    ==================================================================== */
 
