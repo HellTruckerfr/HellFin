@@ -1,11 +1,290 @@
 /* ====================================================================
    HellFin — https://github.com/HellTruckerfr/HellFin
-   Base : ElegantFin by lscambo13 (importé via jsDelivr)
-   Overrides : pages AudioBook → layout Jellyfin par défaut
-   Sélecteur AudioBook confirmé : #itemDetailPage:has([data-type="Author"])
+   CSS from scratch — ElegantFin assets sélectionnés manuellement
+   Construction progressive par catégorie
    ==================================================================== */
 
-@import url('https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css');
+
+/* ====================================================================
+   FONTS
+   ==================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@font-face {
+    font-family: "Material Icons Round";
+    font-style: normal;
+    font-weight: 100 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/materialsymbolsrounded/v267/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190Fjzag.woff2) format("woff2");
+}
+
+
+/* ====================================================================
+   VARIABLES
+   ==================================================================== */
+
+:root {
+    color-scheme: dark;
+
+    /* Couleurs */
+    --darkerGradientPoint: #111827;
+    --darkerGradientPointAlpha: rgba(17, 24, 39, 0.85);
+    --lighterGradientPoint: #1d2635;
+    --lighterGradientPointAlpha: rgba(29, 38, 53, 0.85);
+    --gradientPointAlpha: rgba(29, 38, 53, 0.3);
+    --headerColor: rgba(30, 40, 54, 0.8);
+    --drawerColor: rgba(30, 40, 54, 0.9);
+    --borderColor: hsl(214, 13%, 32%);
+    --darkerBorderColor: hsl(214, 13%, 22%);
+    --lighterBorderColor: hsla(0, 0%, 100%, 0.2);
+    --selectorBackgroundColor: rgb(55, 65, 81);
+    --selectorBackgroundColorAlpha: rgba(55, 65, 81, 0.5);
+    --activeColor: rgb(119, 91, 244);
+    --activeColorAlpha: rgba(119, 91, 244, 0.9);
+    --uiAccentColor: rgb(117 111 226);
+    --textColor: rgb(209, 213, 219);
+    --dimTextColor: rgb(156, 163, 175);
+    --tableBodyColor: rgb(31 41 55 / 1);
+
+    /* Boutons */
+    --btnMiniPlayColor: rgb(41, 154, 93);
+    --btnMiniPlayBorderColor: rgb(50, 167, 105);
+    --btnDeleteColor: rgb(169, 29, 29);
+    --btnDeleteBorderColor: rgb(217, 84, 84);
+    --btnSubmitColor: rgb(61, 54, 178);
+    --btnSubmitBorderColor: rgb(117 111 226);
+    --checkboxCheckedBgColor: rgb(79, 70, 229);
+    --highlightOutlineColor: rgb(37, 99, 235);
+
+    /* Gradients */
+    --backgroundGradient: linear-gradient(0deg, var(--darkerGradientPoint) 35%, var(--lighterGradientPoint));
+    --cardBackgroundGradient: linear-gradient(0deg, var(--darkerGradientPoint), 25%, var(--lighterGradientPoint));
+    --headerColorGradient: linear-gradient(180deg, rgba(30, 40, 54, 0.95) 30%, 55%, transparent 90%);
+    --headerColorGradientAlt: linear-gradient(180deg, rgba(30, 40, 54, 1), 70%, transparent);
+    --cardFooterGradient: linear-gradient(0deg, rgb(0 0 0 / 90%), 40%, transparent);
+    --hoverGradientV: linear-gradient(0deg, transparent, rgb(255 255 255 / 100%) 45%, rgb(255 255 255 / 100%) 55%, transparent);
+    --hoverGradientH: linear-gradient(90deg, transparent, rgb(255 255 255 / 100%) 45%, rgb(255 255 255 / 100%) 55%, transparent);
+
+    /* Dimensions */
+    --largerRadius: 1.25em;
+    --largeRadius: 1em;
+    --smallRadius: 0.5em;
+    --smallerRadius: 0.375em;
+    --borderWidth: 0.06em;
+    --borderWidthDouble: 0.12em;
+    --sidePadding: 3.3%;
+    --itemColumnGap: 1em;
+    --shadow: 0.1em 0.1em 0.15em hsla(0, 0%, 0%, 0.3);
+
+    /* Divers */
+    --defaultBorder: var(--borderWidth) solid var(--borderColor);
+    --defaultLighterBorder: var(--borderWidth) solid var(--lighterBorderColor);
+    --iconPack: "Material Icons Round", Material Icons;
+    --overlayPlayButtonPosition: 2.8em;
+    --cardHoverEffect: "";
+    --blurSmallest: blur(2px);
+    --blurDefault: blur(5px);
+    --blurLarge: blur(10px);
+    --blurLargest: blur(20px);
+    --appBarHeight: 5em;
+}
+
+
+/* ====================================================================
+   TYPOGRAPHIE DE BASE
+   ==================================================================== */
+
+html {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 425;
+    font-style: normal;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+h1, h2 { font-weight: 600; }
+h2 { font-size: 1.25em; }
+
+.material-icons {
+    font-family: var(--iconPack) !important;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga";
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+
+/* ====================================================================
+   CARTES — styling + hover
+   ==================================================================== */
+
+.card {
+    --effectiveWidth: calc((99vw - (var(--sidePadding) * 2)));
+    --cardWidth: calc(var(--effectiveWidth) / var(--cardCount) - var(--itemColumnGap));
+    width: var(--cardWidth) !important;
+    padding: 0.375em;
+    transition: width 0.5s;
+    box-sizing: content-box;
+}
+
+@supports (aspect-ratio: 1 / 1) {
+    .card { box-sizing: border-box; }
+}
+
+.portraitCard { min-width: 5em; }
+
+.cardScalable {
+    border-radius: var(--largeRadius);
+    border: var(--darkerBorderColor) solid var(--borderWidthDouble) !important;
+    overflow: hidden !important;
+    box-shadow: 0 0 0.25em 0 rgba(0, 0, 0, 0.4);
+    transition: transform 125ms;
+}
+
+.cardImageContainer {
+    transition: transform 0.375s;
+}
+
+.cardOverlayContainer {
+    transition: 0.5s;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cardOverlayContainer:after {
+    content: var(--cardHoverEffect);
+    transition: 0.5s;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    transform: translateY(-50%) translateX(0);
+    background: var(--hoverGradientV);
+}
+
+.defaultCardBackground, .cardScalable {
+    background: var(--cardBackgroundGradient);
+}
+
+.cardBox:not(.visualCardBox) .cardPadder {
+    background-color: var(--lighterGradientPoint);
+}
+
+.innerCardFooter, .chapterCardImageContainer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.innerCardFooter, .chapterThumbTextContainer {
+    background: var(--cardFooterGradient);
+    text-shadow: 0.1em 0.1em 0px black;
+    padding: 0em 2em 2em 2em;
+    align-content: end;
+    display: grid;
+    height: 100%;
+}
+
+.visualCardBox, .paperList {
+    background-color: var(--headerColor) !important;
+    border-radius: var(--largeRadius) !important;
+    border: var(--defaultBorder) !important;
+    box-shadow: unset !important;
+    overflow: hidden;
+}
+
+.layout-desktop .visualCardBox {
+    border-width: var(--borderWidthDouble) !important;
+}
+
+.visualCardBox .cardScalable {
+    border-width: 0 0 var(--borderWidth) 0 !important;
+    border-radius: 0 !important;
+    border-color: var(--darkerBorderColor) !important;
+}
+
+/* Hover */
+.card-hoverable:hover .cardScalable,
+.card-hoverable:hover .visualCardBox {
+    border-color: white !important;
+}
+
+.card-hoverable:hover .visualCardBox .cardScalable {
+    border-color: var(--darkerBorderColor) !important;
+}
+
+.card-hoverable:hover .cardImageContainer {
+    transform: scale(1.025);
+}
+
+.card-hoverable .itemSelectionPanel {
+    transition: transform 0.125s;
+}
+
+.card-hoverable:hover .cardScalable,
+.card-hoverable:hover .itemSelectionPanel {
+    transform: scale(1.02);
+}
+
+.card-hoverable .cardScalable:active {
+    transition: transform 0.075s;
+    transform: scale(1);
+}
+
+.card-hoverable:hover .cardOverlayContainer:after {
+    transform: translateY(50%) translateX(0);
+    opacity: 0;
+}
+
+.backdropCard.card-hoverable .cardOverlayContainer:after,
+.overflowBackdropCard.card-hoverable .cardOverlayContainer:after {
+    transform: translateY(0) translateX(-50%);
+    background: var(--hoverGradientH);
+}
+
+.backdropCard.card-hoverable:hover .cardOverlayContainer:after,
+.overflowBackdropCard.card-hoverable:hover .cardOverlayContainer:after {
+    transform: translateY(0) translateX(50%);
+    opacity: 0;
+}
+
+.card:focus .cardBox.visualCardBox,
+.card:focus .cardBox:not(.visualCardBox) .cardScalable {
+    border-color: white !important;
+}
+
+/* Bouton play overlay */
+.cardOverlayContainer > .cardOverlayFab-primary {
+    left: unset;
+    margin-left: unset;
+    margin-top: unset;
+    top: unset;
+    left: calc(var(--overlayPlayButtonPosition) - 1.5em);
+    bottom: calc(var(--overlayPlayButtonPosition) - 1.5em);
+}
+
+.cardOverlayContainer > .cardOverlayFab-primary,
+.listItemImageButton {
+    background-color: var(--btnMiniPlayColor) !important;
+    color: white;
+    border: var(--defaultLighterBorder);
+    border-color: var(--btnMiniPlayBorderColor);
+    font-size: 75%;
+    box-shadow: var(--shadow);
+    z-index: 2;
+}
+
+.cardOverlayContainer:has(> button:hover) {
+    backdrop-filter: var(--blurDefault);
+}
 
 
 /* ====================================================================
@@ -18,48 +297,20 @@
 
 
 /* ====================================================================
-   AUDIOBOOKS — reset ElegantFin, layout Jellyfin par défaut
-   ElegantFin : .itemBackdrop { display:block !important }  spécificité [0,1,0]
-   Nos overrides : #itemDetailPage:has([data-type="Author"]) ...  spécificité [1,2,0]
-   → nos règles gagnent sur toutes les règles ElegantFin
-   ==================================================================== */
-
-/* 1. Backdrop : masquer (ElegantFin le montre globalement) */
-#itemDetailPage:has([data-type="Author"]) .itemBackdrop { display: none !important; visibility: hidden !important; }
-
-/* 2. Wrapper : annuler le gradient et la hauteur min */
-.layout-desktop #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; }
-.layout-tv #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-left: unset !important; }
-
-/* 3. Container principal : cover gauche, infos droite (annuler flex-column d'ElegantFin) */
-#itemDetailPage:has([data-type="Author"]) .detailPagePrimaryContainer { flex-direction: row !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: unset !important; }
-
-/* 4. Ribbon : annuler la hauteur min forcée par ElegantFin */
-.layout-desktop #itemDetailPage:has([data-type="Author"]) .detailRibbon { height: unset !important; min-height: unset !important; }
-
-/* 5. Carte cover : montrer (ElegantFin cache .detailImageContainer .card globalement) */
-#itemDetailPage:has([data-type="Author"]) .detailImageContainer .card { display: block !important; position: relative !important; width: 300px !important; float: none !important; left: auto !important; top: auto !important; margin: 0 !important; place-self: start !important; }
-
-/* 6. Container cover : visible, largeur fixe */
-#itemDetailPage:has([data-type="Author"]) .detailImageContainer.hide-mobile { display: block !important; width: 300px !important; min-width: 300px !important; flex-shrink: 0 !important; padding: 0 !important; }
-
-/* 7. Titre : pas de troncature */
-#itemDetailPage:has([data-type="Author"]) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
-
-/* 8. Sections détail : colonne unique */
-#itemDetailPage:has([data-type="Author"]) .detailSection { grid-template-columns: 1fr !important; }
-
-
-/* ====================================================================
-   FILMS — overrides ici si besoin
+   FILMS — page de détail
    ==================================================================== */
 
 
 /* ====================================================================
-   SÉRIES — overrides ici si besoin
+   SÉRIES — page de détail
    ==================================================================== */
 
 
 /* ====================================================================
-   MUSIQUE — overrides ici si besoin
+   MUSIQUE — page de détail
+   ==================================================================== */
+
+
+/* ====================================================================
+   AUDIOBOOKS — page de détail
    ==================================================================== */
