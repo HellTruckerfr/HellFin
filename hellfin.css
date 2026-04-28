@@ -963,20 +963,20 @@ body {
     margin-top: unset;
 }
 
-body:not(:has(.detailImageContainer .portraitCard)) .layout-desktop .detailPageWrapperContainer {
+.layout-desktop #itemDetailPage:not(:has([data-type="Author"])) .detailPageWrapperContainer {
     background: transparent;
     min-height: 46vh;
     background: linear-gradient(180deg, transparent, 17vh, var(--darkerGradientPointAlpha) 50vh);
 }
 
-body:not(:has(.detailImageContainer .portraitCard)) .layout-tv .detailPageWrapperContainer {
+.layout-tv #itemDetailPage:not(:has([data-type="Author"])) .detailPageWrapperContainer {
     padding-left: 30vw;
     background: transparent;
     min-height: 46vh;
     background: linear-gradient(0deg, var(--darkerGradientPointAlpha) 70%, 85%, transparent);
 }
 
-body:not(:has(.detailImageContainer .portraitCard)) .detailPagePrimaryContainer {
+#itemDetailPage:not(:has([data-type="Author"])) .detailPagePrimaryContainer {
     align-content: space-between;
     align-items: stretch;
     justify-content: end;
@@ -1158,7 +1158,7 @@ body:not(:has(.detailImageContainer .portraitCard)) .detailPagePrimaryContainer 
     align-content: flex-end;
 }
 
-body:not(:has(.detailImageContainer .portraitCard)) .layout-desktop .detailRibbon {
+.layout-desktop #itemDetailPage:not(:has([data-type="Author"])) .detailRibbon {
     height: 100%;
     min-height: 25vh;
     margin-top: unset;
@@ -1218,7 +1218,7 @@ body:not(:has(.detailImageContainer .portraitCard)) .layout-desktop .detailRibbo
     object-fit: cover;
 } */
 
-body:not(:has(.detailImageContainer .portraitCard)) .itemBackdrop {
+#itemDetailPage:not(:has([data-type="Author"])) .itemBackdrop {
     display: block !important;
 }
 
@@ -1294,7 +1294,7 @@ body:not(:has(.detailImageContainer .portraitCard)) .itemBackdrop {
     top: calc(100vh - 11em - var(--secondaryItemPageNegativeSpace));
 }
 
-body:not(:has(.detailImageContainer .portraitCard)) .layout-desktop .detailImageContainer .card {
+.layout-desktop #itemDetailPage:not(:has([data-type="Author"])) .detailImageContainer .card {
     position: relative !important;
     width: 22vh !important;
     float: none;
@@ -1315,7 +1315,7 @@ body:not(:has(.detailImageContainer .portraitCard)) .layout-desktop .detailImage
     display: none;
 }
 
-body:not(:has(.detailImageContainer .portraitCard)) .layout-tv .detailImageContainer .card {
+.layout-tv #itemDetailPage:not(:has([data-type="Author"])) .detailImageContainer .card {
     width: 25vw !important;
     display: block !important;
     position: fixed !important;
@@ -4060,22 +4060,26 @@ for extended styling, use the add-on */
 
 /* -----------------------------------------------------------------------
    AUDIOBOOKS — layout Jellyfin par défaut (cover gauche, infos droite)
-   Les règles ElegantFin ci-dessus sont scopées avec body:not(:has(.book))
-   donc elles NE S'APPLIQUENT PAS aux pages AudioBook.
-   On rajoute ici uniquement ce qui est nécessaire pour le layout voulu.
+   Sélecteur : #itemDetailPage:has([data-type="Author"])
    ----------------------------------------------------------------------- */
 
-/* Backdrop : masquer explicitement (Jellyfin le montre aussi par défaut) */
-body:has(.detailImageContainer .portraitCard) .itemBackdrop { display: none !important; }
+/* Backdrop : masquer */
+#itemDetailPage:has([data-type="Author"]) .itemBackdrop { display: none !important; }
 
-/* Cover : largeur fixe dans le flux normal */
-body:has(.detailImageContainer .portraitCard) .detailImageContainer.hide-mobile { width: 300px; min-width: 300px; flex-shrink: 0; padding: 0; }
+/* Layout horizontal : cover gauche, infos droite */
+#itemDetailPage:has([data-type="Author"]) .detailPagePrimaryContainer { flex-direction: row !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: unset !important; }
+
+/* Cover : montrer la carte (ElegantFin la cache globalement via .detailImageContainer .card { display:none }) */
+#itemDetailPage:has([data-type="Author"]) .detailImageContainer .card { display: block !important; position: relative !important; width: 300px !important; float: none !important; left: auto !important; top: auto !important; margin: 0 !important; place-self: start !important; }
+
+/* Container cover : visible, largeur fixe */
+#itemDetailPage:has([data-type="Author"]) .detailImageContainer.hide-mobile { display: block !important; width: 300px !important; min-width: 300px !important; flex-shrink: 0 !important; padding: 0 !important; }
 
 /* Titre : pas de troncature */
-body:has(.detailImageContainer .portraitCard) .itemName { white-space: normal; overflow: visible; text-overflow: unset; }
+#itemDetailPage:has([data-type="Author"]) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
 
 /* Sections : colonne unique */
-body:has(.detailImageContainer .portraitCard) .detailSection { grid-template-columns: 1fr; }
+#itemDetailPage:has([data-type="Author"]) .detailSection { grid-template-columns: 1fr !important; }
 
 /* GLOBAL */
 .detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
