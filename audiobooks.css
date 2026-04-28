@@ -5,8 +5,10 @@
    Confirmé fonctionnel via DevTools (itemBackdrop est dans itemDetailPage)
    ==================================================================== */
 
-/* 1. Backdrop — masquer (ElegantFin : .itemBackdrop { display:block !important } spécificité [0,1,0]) */
+/* 1. Backdrop — masquer l'élément interne ET le container externe (hors #itemDetailPage) */
 #itemDetailPage:has([data-type="Author"]) #itemBackdrop { display: none !important; }
+#reactRoot:has(#itemDetailPage [data-type="Author"]) .backdropContainer { display: none !important; }
+#reactRoot:has(#itemDetailPage [data-type="Author"]) .backgroundContainer.withBackdrop { display: none !important; }
 
 /* 2. Wrapper — annuler gradient et hauteur min ElegantFin */
 .layout-desktop #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; }
