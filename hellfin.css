@@ -963,20 +963,20 @@ body {
     margin-top: unset;
 }
 
-.layout-desktop .detailPageWrapperContainer {
+body:not(:has(.detailImageContainer .book)) .layout-desktop .detailPageWrapperContainer {
     background: transparent;
     min-height: 46vh;
     background: linear-gradient(180deg, transparent, 17vh, var(--darkerGradientPointAlpha) 50vh);
 }
 
-.layout-tv .detailPageWrapperContainer {
+body:not(:has(.detailImageContainer .book)) .layout-tv .detailPageWrapperContainer {
     padding-left: 30vw;
     background: transparent;
     min-height: 46vh;
     background: linear-gradient(0deg, var(--darkerGradientPointAlpha) 70%, 85%, transparent);
 }
 
-.detailPagePrimaryContainer {
+body:not(:has(.detailImageContainer .book)) .detailPagePrimaryContainer {
     align-content: space-between;
     align-items: stretch;
     justify-content: end;
@@ -985,8 +985,6 @@ body {
     align-items: center;
     /* this aligns the plot to left on 10.11.0 */
     text-align: left;
-    /* temporarily disabled for 10.11.0 */
-    /* margin-bottom: -1.5em; */
 }
 
 /* this disables block padding on pre-10.11.0 */
@@ -1160,7 +1158,7 @@ body {
     align-content: flex-end;
 }
 
-.layout-desktop .detailRibbon {
+body:not(:has(.detailImageContainer .book)) .layout-desktop .detailRibbon {
     height: 100%;
     min-height: 25vh;
     margin-top: unset;
@@ -1220,7 +1218,7 @@ body {
     object-fit: cover;
 } */
 
-.itemBackdrop {
+body:not(:has(.detailImageContainer .book)) .itemBackdrop {
     display: block !important;
 }
 
@@ -1296,7 +1294,7 @@ body {
     top: calc(100vh - 11em - var(--secondaryItemPageNegativeSpace));
 }
 
-.layout-desktop .detailImageContainer .card {
+body:not(:has(.detailImageContainer .book)) .layout-desktop .detailImageContainer .card {
     position: relative !important;
     width: 22vh !important;
     float: none;
@@ -1317,7 +1315,7 @@ body {
     display: none;
 }
 
-.layout-tv .detailImageContainer .card {
+body:not(:has(.detailImageContainer .book)) .layout-tv .detailImageContainer .card {
     width: 25vw !important;
     display: block !important;
     position: fixed !important;
@@ -4062,35 +4060,19 @@ for extended styling, use the add-on */
 
 /* -----------------------------------------------------------------------
    AUDIOBOOKS — layout Jellyfin par défaut (cover gauche, infos droite)
-   Sélecteurs plus spécifiques + !important = battent toutes les règles
-   ElegantFin ci-dessus, quelle que soit leur spécificité ou !important
+   Les règles ElegantFin ci-dessus sont scopées avec body:not(:has(.book))
+   donc elles NE S'APPLIQUENT PAS aux pages AudioBook.
+   On rajoute ici uniquement ce qui est nécessaire pour le layout voulu.
    ----------------------------------------------------------------------- */
 
-/* Backdrop : masquer — ElegantFin force display:block!important sur .itemBackdrop */
-/* Sélecteur identique à ElegantFin (.detailImageContainer .book) + spécificité supérieure */
-#itemDetailPage:has(.detailImageContainer .book) .itemBackdrop { display: none !important; }
-
-/* Wrapper : supprimer min-height/gradient/padding-left (layout-tv 30vw) */
-#itemDetailPage:has(.detailImageContainer .book) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-left: 0 !important; margin-top: 0 !important; padding-top: 0 !important; }
-
-/* Container principal : row (cover gauche, ribbon droite) */
-#itemDetailPage:has(.detailImageContainer .book) .detailPagePrimaryContainer { flex-direction: row !important; flex-wrap: nowrap !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: initial !important; }
-
-/* Zone image : bloc, hauteur auto */
-#itemDetailPage:has(.detailImageContainer .book) .detailImageContainer { display: block !important; height: auto !important; align-items: initial !important; justify-content: initial !important; }
-#itemDetailPage:has(.detailImageContainer .book) .detailImageContainer.hide-mobile { width: 300px !important; min-width: 300px !important; flex-shrink: 0 !important; padding: 0 !important; }
-
-/* Card de couverture : statique, pleine largeur, pas de fixed/auto-margin */
-#itemDetailPage:has(.detailImageContainer .book) .detailImageContainer .card { display: block !important; position: static !important; width: 100% !important; place-self: start !important; float: none !important; margin: 0 !important; top: unset !important; bottom: unset !important; left: unset !important; transform: none !important; }
-
-/* Ribbon : tout l'espace restant */
-#itemDetailPage:has(.detailImageContainer .book) .detailRibbon { flex: 1 1 auto !important; height: auto !important; min-height: unset !important; margin-top: 0 !important; }
+/* Cover : largeur fixe dans le flux normal */
+body:has(.detailImageContainer .book) .detailImageContainer.hide-mobile { width: 300px; min-width: 300px; flex-shrink: 0; padding: 0; }
 
 /* Titre : pas de troncature */
-#itemDetailPage:has(.detailImageContainer .book) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
+body:has(.detailImageContainer .book) .itemName { white-space: normal; overflow: visible; text-overflow: unset; }
 
 /* Sections : colonne unique */
-#itemDetailPage:has(.detailImageContainer .book) .detailSection { grid-template-columns: 1fr !important; }
+body:has(.detailImageContainer .book) .detailSection { grid-template-columns: 1fr; }
 
 /* GLOBAL */
 .detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
