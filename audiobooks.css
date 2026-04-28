@@ -2,26 +2,26 @@
    HellFin — audiobooks.css
    Reset ElegantFin sur les pages de détail AudioBook uniquement.
    Sélecteur : #itemDetailPage:has([data-type="Author"])
-   Confirmé fonctionnel via DevTools (itemBackdrop est dans itemDetailPage)
    ==================================================================== */
 
-/* 1. Backdrop — masquer l'élément interne ET le container externe (hors #itemDetailPage) */
+/* 1. Backdrop interne — masquer */
 #itemDetailPage:has([data-type="Author"]) #itemBackdrop { display: none !important; }
+
+/* Backdrop externe (.backdropContainer est hors #itemDetailPage) — masquer l'image, garder le fond */
 #reactRoot:has(#itemDetailPage [data-type="Author"]) .backdropContainer { display: none !important; }
-#reactRoot:has(#itemDetailPage [data-type="Author"]) .backgroundContainer.withBackdrop { display: none !important; }
 
-/* 2. Wrapper — annuler gradient et hauteur min ElegantFin */
-.layout-desktop #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; }
-.layout-tv #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-left: unset !important; }
+/* 2. Wrapper — poser le fond sombre, position relative pour contenir la cover absolue */
+#itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; position: relative !important; padding-left: 360px !important; padding-top: 2em !important; }
+.layout-tv #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { padding-left: unset !important; }
 
-/* 3. Container principal — espace à gauche pour la cover absolue */
-#itemDetailPage:has([data-type="Author"]) .detailPagePrimaryContainer { position: relative !important; flex-direction: column !important; padding-left: 340px !important; min-height: 500px !important; align-items: unset !important; justify-content: center !important; align-content: unset !important; }
+/* 3. Container principal — reset flex ElegantFin */
+#itemDetailPage:has([data-type="Author"]) .detailPagePrimaryContainer { position: unset !important; flex-direction: column !important; padding-left: unset !important; min-height: unset !important; align-items: unset !important; justify-content: unset !important; align-content: unset !important; }
 
 /* 4. Ribbon — annuler hauteur min forcée */
 .layout-desktop #itemDetailPage:has([data-type="Author"]) .detailRibbon { height: unset !important; min-height: unset !important; }
 
-/* 5. Container cover — absolue en haut à gauche */
-#itemDetailPage:has([data-type="Author"]) .detailImageContainer.hide-mobile { display: block !important; position: absolute !important; left: 0 !important; top: 0 !important; width: 320px !important; padding: 0 !important; }
+/* 5. Cover — absolue en haut à gauche du wrapper */
+#itemDetailPage:has([data-type="Author"]) .detailImageContainer.hide-mobile { display: block !important; position: absolute !important; left: 0 !important; top: 0 !important; width: 340px !important; padding: 0 !important; }
 
 /* 6. Carte cover — montrer (ElegantFin : .detailImageContainer .card { display:none }) */
 #itemDetailPage:has([data-type="Author"]) .detailImageContainer .card { display: block !important; position: relative !important; width: 100% !important; float: none !important; left: auto !important; top: auto !important; margin: 0 !important; place-self: start !important; }
