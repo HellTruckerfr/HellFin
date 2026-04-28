@@ -963,20 +963,20 @@ body {
     margin-top: unset;
 }
 
-body:not(:has(.detailImageContainer .book)) .layout-desktop .detailPageWrapperContainer {
+body:not(:has([data-type="AudioBook"])) .layout-desktop .detailPageWrapperContainer {
     background: transparent;
     min-height: 46vh;
     background: linear-gradient(180deg, transparent, 17vh, var(--darkerGradientPointAlpha) 50vh);
 }
 
-body:not(:has(.detailImageContainer .book)) .layout-tv .detailPageWrapperContainer {
+body:not(:has([data-type="AudioBook"])) .layout-tv .detailPageWrapperContainer {
     padding-left: 30vw;
     background: transparent;
     min-height: 46vh;
     background: linear-gradient(0deg, var(--darkerGradientPointAlpha) 70%, 85%, transparent);
 }
 
-body:not(:has(.detailImageContainer .book)) .detailPagePrimaryContainer {
+body:not(:has([data-type="AudioBook"])) .detailPagePrimaryContainer {
     align-content: space-between;
     align-items: stretch;
     justify-content: end;
@@ -1158,7 +1158,7 @@ body:not(:has(.detailImageContainer .book)) .detailPagePrimaryContainer {
     align-content: flex-end;
 }
 
-body:not(:has(.detailImageContainer .book)) .layout-desktop .detailRibbon {
+body:not(:has([data-type="AudioBook"])) .layout-desktop .detailRibbon {
     height: 100%;
     min-height: 25vh;
     margin-top: unset;
@@ -1218,7 +1218,7 @@ body:not(:has(.detailImageContainer .book)) .layout-desktop .detailRibbon {
     object-fit: cover;
 } */
 
-body:not(:has(.detailImageContainer .book)) .itemBackdrop {
+body:not(:has([data-type="AudioBook"])) .itemBackdrop {
     display: block !important;
 }
 
@@ -1294,7 +1294,7 @@ body:not(:has(.detailImageContainer .book)) .itemBackdrop {
     top: calc(100vh - 11em - var(--secondaryItemPageNegativeSpace));
 }
 
-body:not(:has(.detailImageContainer .book)) .layout-desktop .detailImageContainer .card {
+body:not(:has([data-type="AudioBook"])) .layout-desktop .detailImageContainer .card {
     position: relative !important;
     width: 22vh !important;
     float: none;
@@ -1315,7 +1315,7 @@ body:not(:has(.detailImageContainer .book)) .layout-desktop .detailImageContaine
     display: none;
 }
 
-body:not(:has(.detailImageContainer .book)) .layout-tv .detailImageContainer .card {
+body:not(:has([data-type="AudioBook"])) .layout-tv .detailImageContainer .card {
     width: 25vw !important;
     display: block !important;
     position: fixed !important;
@@ -4066,13 +4066,13 @@ for extended styling, use the add-on */
    ----------------------------------------------------------------------- */
 
 /* Cover : largeur fixe dans le flux normal */
-body:has(.detailImageContainer .book) .detailImageContainer.hide-mobile { width: 300px; min-width: 300px; flex-shrink: 0; padding: 0; }
+body:has([data-type="AudioBook"]) .detailImageContainer.hide-mobile { width: 300px; min-width: 300px; flex-shrink: 0; padding: 0; }
 
 /* Titre : pas de troncature */
-body:has(.detailImageContainer .book) .itemName { white-space: normal; overflow: visible; text-overflow: unset; }
+body:has([data-type="AudioBook"]) .itemName { white-space: normal; overflow: visible; text-overflow: unset; }
 
 /* Sections : colonne unique */
-body:has(.detailImageContainer .book) .detailSection { grid-template-columns: 1fr; }
+body:has([data-type="AudioBook"]) .detailSection { grid-template-columns: 1fr; }
 
 /* GLOBAL */
 .detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
