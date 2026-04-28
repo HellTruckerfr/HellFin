@@ -1,10 +1,3 @@
-/* ====================================================================
-   HellFin — https://github.com/HellTruckerfr/HellFin
-   Fork de ElegantFin v25.12.31 par lscambo13
-   ElegantFin s'applique à tout sauf AudioBooks (layout Jellyfin par défaut)
-   ==================================================================== */
-
-/* ========================= ElegantFin v25.12.31 ========================= */
 /* ElegantFin Theme for Jellyfin by lscambo13 */
 
 /* Add-ons: Uncomment to enable */
@@ -4057,44 +4050,3 @@ for extended styling, use the add-on */
 }
 
 /* basic styling for the Media Bar Plugin - end */
-
-/* ========================= HellFin Overrides ========================= */
-
-/* -----------------------------------------------------------------------
-   AUDIOBOOKS — layout Jellyfin par défaut (cover gauche, infos droite)
-   Sélecteurs plus spécifiques + !important = battent toutes les règles
-   ElegantFin ci-dessus, quelle que soit leur spécificité ou !important
-   ----------------------------------------------------------------------- */
-
-/* Backdrop : masquer — ElegantFin force display:block!important (ligne ~1217) */
-#itemDetailPage:has([data-type="AudioBook"]) .itemBackdrop { display: none !important; }
-
-/* Wrapper : supprimer min-height/gradient/padding-left (layout-tv 30vw) */
-#itemDetailPage:has([data-type="AudioBook"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-left: 0 !important; margin-top: 0 !important; padding-top: 0 !important; }
-
-/* Container principal : row (cover gauche, ribbon droite) */
-#itemDetailPage:has([data-type="AudioBook"]) .detailPagePrimaryContainer { flex-direction: row !important; flex-wrap: nowrap !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: initial !important; }
-
-/* Zone image : bloc, hauteur auto */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer { display: block !important; height: auto !important; align-items: initial !important; justify-content: initial !important; }
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer.hide-mobile { width: 300px !important; min-width: 300px !important; flex-shrink: 0 !important; padding: 0 !important; }
-
-/* Card de couverture : statique, pleine largeur, pas de fixed/auto-margin */
-#itemDetailPage:has([data-type="AudioBook"]) .detailImageContainer .card { display: block !important; position: static !important; width: 100% !important; place-self: start !important; float: none !important; margin: 0 !important; top: unset !important; bottom: unset !important; left: unset !important; transform: none !important; }
-
-/* Ribbon : tout l'espace restant */
-#itemDetailPage:has([data-type="AudioBook"]) .detailRibbon { flex: 1 1 auto !important; height: auto !important; min-height: unset !important; margin-top: 0 !important; }
-
-/* Titre : pas de troncature */
-#itemDetailPage:has([data-type="AudioBook"]) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
-
-/* Sections : colonne unique */
-#itemDetailPage:has([data-type="AudioBook"]) .detailSection { grid-template-columns: 1fr !important; }
-
-/* GLOBAL */
-.detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
-.overview-controls { display: none !important; }
-
-/* FILMS — overrides ici */
-/* SÉRIES — overrides ici */
-/* MUSIQUE — overrides ici */
