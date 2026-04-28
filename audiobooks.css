@@ -1,0 +1,35 @@
+/* ====================================================================
+   HellFin — audiobooks.css
+   Reset ElegantFin sur les pages de détail AudioBook uniquement.
+   Sélecteur : #itemDetailPage:has([data-type="Author"])
+   Confirmé fonctionnel via DevTools (itemBackdrop est dans itemDetailPage)
+   ==================================================================== */
+
+/* 1. Backdrop — masquer (ElegantFin : .itemBackdrop { display:block !important } spécificité [0,1,0]) */
+#itemDetailPage:has([data-type="Author"]) #itemBackdrop { display: none !important; }
+
+/* 2. Wrapper — annuler gradient et hauteur min ElegantFin */
+.layout-desktop #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; }
+.layout-tv #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; padding-left: unset !important; }
+
+/* 3. Layout horizontal — cover gauche, infos droite */
+#itemDetailPage:has([data-type="Author"]) .detailPagePrimaryContainer { flex-direction: row !important; align-items: flex-start !important; justify-content: flex-start !important; align-content: unset !important; }
+
+/* 4. Ribbon — annuler hauteur min forcée */
+.layout-desktop #itemDetailPage:has([data-type="Author"]) .detailRibbon { height: unset !important; min-height: unset !important; }
+
+/* 5. Carte cover — montrer (ElegantFin : .detailImageContainer .card { display:none }) */
+#itemDetailPage:has([data-type="Author"]) .detailImageContainer .card { display: block !important; position: relative !important; width: 300px !important; float: none !important; left: auto !important; top: auto !important; margin: 0 !important; place-self: start !important; }
+
+/* 6. Container cover — largeur fixe */
+#itemDetailPage:has([data-type="Author"]) .detailImageContainer.hide-mobile { display: block !important; width: 300px !important; min-width: 300px !important; flex-shrink: 0 !important; padding: 0 !important; }
+
+/* 7. Titre — pas de troncature */
+#itemDetailPage:has([data-type="Author"]) .itemName { white-space: normal !important; overflow: visible !important; text-overflow: unset !important; }
+
+/* 8. Sections — colonne unique */
+#itemDetailPage:has([data-type="Author"]) .detailSection { grid-template-columns: 1fr !important; }
+
+/* 9. Synopsis toujours développé (global) */
+.detail-clamp-text { display: block !important; -webkit-line-clamp: unset !important; overflow: visible !important; }
+.overview-controls { display: none !important; }
