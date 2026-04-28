@@ -88,6 +88,13 @@
     --blurLarge: blur(10px);
     --blurLargest: blur(20px);
     --appBarHeight: 5em;
+    --backdropTrimFromTop: 10%;
+    --headerBlurLayerVisibility: "";
+    --headerBackground: var(--headerColorGradient);
+    --headerBlurMask: linear-gradient(180deg, white 50%, 85%, transparent);
+    --topOSDGradient: linear-gradient(180deg, hsla(0, 0%, 0%, 0.8), 45%, hsla(0, 0%, 0%, 0));
+    --bottomOSDGradient: linear-gradient(0deg, hsla(0, 0%, 0%, 0.8), 45%, hsla(0, 0%, 0%, 0));
+    --itemBackdropMask: linear-gradient(180deg, rgba(0, 0, 0, 0.8), 75%, transparent);
 }
 
 
@@ -123,6 +130,38 @@ html,
     background: var(--darkerGradientPoint);
 }
 
+/* Image backdrop — overlay flouté cinématographique */
+.backdropImage {
+    background-position-y: clamp(0%, calc(var(--backdropTrimFromTop) * 5), 100%);
+}
+
+.backdropImage::after,
+.backdropImage::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background: inherit;
+}
+
+.backdropImage::after {
+    z-index: 0;
+    height: 80vh;
+    -webkit-mask: linear-gradient(180deg, rgba(0, 0, 0, 1) 75%, transparent);
+    mask: linear-gradient(180deg, rgba(0, 0, 0, 1) 75%, transparent);
+}
+
+.layout-desktop .backdropImage::after { transition: opacity 0.25s; }
+
+.backdropImage::before {
+    transform: scale(1.1);
+    filter: var(--blurLargest);
+}
+
+.backdropImageFadeIn {
+    transform-origin: bottom center;
+    animation: animScaleUp 0.5s ease-out forwards;
+}
+
 
 /* ====================================================================
    HEADER / APP BAR
@@ -151,8 +190,40 @@ html,
 .layout-desktop .headerTop { padding: 0 1em; }
 .layout-tv .headerTop { padding: 0 0.5em; }
 
+.headroom { transition: transform 0.5s; }
+
 .headroom--unpinned {
     transform: translateY(calc(-1 * var(--appBarHeight) - var(--borderWidth)));
+}
+
+/* Header transparent sur la home (titre vide) */
+.skinHeader.headroom:not(.osdHeader, .noHomeButtonHeader):has(.pageTitle:empty)::after,
+.skinHeader.headroom:not(.osdHeader, .noHomeButtonHeader):has(.pageTitle:empty) {
+    --headerBackground: none;
+    backdrop-filter: none;
+    background-color: transparent;
+    border: none;
+}
+
+/* Blur layer avancé (container queries) */
+@container skinHeader (min-height: 4.9em) {
+    .skinHeader-blurred:not(.osdHeader):not(.semiTransparent) {
+        backdrop-filter: none;
+        background-color: transparent;
+        border: none;
+        background: var(--headerBackground);
+        padding: 0;
+    }
+
+    .skinHeader-blurred:not(.osdHeader):not(.semiTransparent)::after {
+        content: var(--headerBlurLayerVisibility);
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        backdrop-filter: var(--blurLargest);
+        -webkit-mask: var(--headerBlurMask);
+        mask: var(--headerBlurMask);
+        z-index: -1;
+    }
 }
 
 .sectionTabs {
