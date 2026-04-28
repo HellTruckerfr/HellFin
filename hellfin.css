@@ -130,19 +130,6 @@ h2 { font-size: 1.25em; }
    CARTES — styling + hover
    ==================================================================== */
 
-.card {
-    --effectiveWidth: calc((99vw - (var(--sidePadding) * 2)));
-    --cardWidth: calc(var(--effectiveWidth) / var(--cardCount) - var(--itemColumnGap));
-    width: var(--cardWidth) !important;
-    padding: 0.375em;
-    transition: width 0.5s;
-    box-sizing: content-box;
-}
-
-@supports (aspect-ratio: 1 / 1) {
-    .card { box-sizing: border-box; }
-}
-
 .portraitCard { min-width: 5em; }
 
 .cardScalable {
