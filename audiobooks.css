@@ -4,15 +4,12 @@
    Sélecteur : #itemDetailPage:has([data-type="Author"])
    ==================================================================== */
 
-/* 1. Backdrop interne — masquer */
+/* 1. Backdrop interne — masquer (layout uniquement, le backdropContainer externe reste visible) */
 #itemDetailPage:has([data-type="Author"]) #itemBackdrop { display: none !important; }
 
-/* Backdrop externe (.backdropContainer est hors #itemDetailPage) — masquer l'image, garder le fond */
-#reactRoot:has(#itemDetailPage [data-type="Author"]) .backdropContainer { display: none !important; }
-
-/* 2. Wrapper — poser le fond sombre, position relative pour contenir la cover absolue */
-#itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; position: relative !important; padding-left: 360px !important; padding-top: 2em !important; }
-.layout-tv #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { padding-left: unset !important; }
+/* 2. Wrapper — position relative pour contenir la cover absolue, contenu descendu */
+#itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { background: transparent !important; min-height: unset !important; position: relative !important; padding-left: 360px !important; padding-top: 35vh !important; }
+.layout-tv #itemDetailPage:has([data-type="Author"]) .detailPageWrapperContainer { padding-left: unset !important; padding-top: 2em !important; }
 
 /* 3. Container principal — reset flex ElegantFin */
 #itemDetailPage:has([data-type="Author"]) .detailPagePrimaryContainer { position: unset !important; flex-direction: column !important; padding-left: unset !important; min-height: unset !important; align-items: unset !important; justify-content: unset !important; align-content: unset !important; }
